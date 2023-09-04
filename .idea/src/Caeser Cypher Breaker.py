@@ -90,7 +90,7 @@ def parse_file(file_path: Path, english_words: list[str]):
 
 def main():
     file_path = get_user_input("Enter dictionary file name or path:")
-    english_words = read_dictionary()
+    english_words = read_dictionary(file_path)
     file_path: Path = get_user_input("Please enter name of text file or full path:")
     parse_file(file_path, english_words)
 

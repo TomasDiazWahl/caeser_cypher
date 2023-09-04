@@ -2,7 +2,10 @@ from pathlib import Path
 
 def get_user_input(msg: str) -> Path:
     file_name: str = input(msg)
+    current_directory = Path.cwd()
     file_path: Path = Path(file_name)
+    if not file_path.is_absolute():
+        file_path = current_directory / file_path
     return file_path
 
 def parse_line(line: str, english_words: list[str]):

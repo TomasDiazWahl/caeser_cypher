@@ -21,22 +21,55 @@ def read_dictionary(file_path: Path) -> list[str]:
 
     return words
 
-def word_in_dict(word: str, english_words: list[str]):
-    pass
+def word_in_dict(word: str, english_words: list[str]) -> bool:
+    if word not in english_words:
+        return false
+    else:
+        return true
 
-def brute_force_cypher(words: list[str], english_words: list[str]):
+def shift(word) -> str:
+    shifted_word: str = ""
+    for i in range(len(word)):
+        schar = (((word[j] - a_ascii) + i) % alphabet_length) + a_ascii
+        shifted_word += schar
+        return shifted_word
+
+def brute_force_cypher(sentence: list[str], english_words: list[str]):
     a_ascii: int = ord('a')
     alphabet_length: int = 26
-    for i in range(alphabet_length):
-        success: bool = True
-        for word in words:
-            shifted_word: str = ""
-            for j in range(len(word)):
-                schar = (((word[j] - a_ascii) + i) % alphabet_length) + a_ascii
-                shifted_word += schar
-                if shifted_word not in english_words:
-                    break
-         pass
+    shift_counter: int = 0
+    all_words_correct: bool = false
+    word_correct: bool = true
+    shifted_word_sentence = sentence.copy()
+
+    while not all_words_correct:
+        for word in shifted_word_sentence:
+            if not word_in_dict(word, english_words):
+                word_correct = false
+                break
+        if word_correct:
+            all_words_correct = True
+            break
+        else:
+            for word in shifted_word_sentence:
+                shifted_word = shift(word)
+            shift_counter += 1;
+        if shift_counter >= alphabet_length - 1:
+            print("We fucked up")
+            break
+
+
+
+    # for i in range(alphabet_length):
+    #     success: bool = True
+    #     for word in words:
+    #         shifted_word: str = ""
+    #         for j in range(len(word)):
+    #             schar = (((word[j] - a_ascii) + i) % alphabet_length) + a_ascii
+    #             shifted_word += schar
+    #             if shifted_word not in english_words:
+    #                 break
+    #      pass
 
 
 

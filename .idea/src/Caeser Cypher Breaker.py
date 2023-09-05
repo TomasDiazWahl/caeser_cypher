@@ -26,14 +26,14 @@ def read_dictionary(file_path: Path) -> list[str]:
 
 def word_in_dict(word: str, english_words: list[str]) -> bool:
     if word not in english_words:
-        return false
+        return False
     else:
-        return true
+        return True
 
 def shift(word) -> str:
     shifted_word: str = ""
     for i in range(len(word)):
-        schar = (((word[j] - a_ascii) + i) % alphabet_length) + a_ascii
+        schar = (((word[i] - a_ascii) + i) % alphabet_length) + a_ascii
         shifted_word += schar
         return shifted_word
 

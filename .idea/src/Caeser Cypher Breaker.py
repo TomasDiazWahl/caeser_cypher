@@ -86,6 +86,8 @@ def parse_file(file_path: Path, english_words: list[str]):
         a_line: str = a_line.strip()
         sentences.append(a_line)
 
+    #Bug here either lines have to be passed one by one in for loop or
+    #for loop should be moved inside parse line
     parse_line(sentences, english_words)
 
 def main():

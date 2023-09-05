@@ -41,14 +41,14 @@ def brute_force_cypher(sentence: list[str], english_words: list[str]):
     a_ascii: int = ord('a')
     alphabet_length: int = 26
     shift_counter: int = 0
-    all_words_correct: bool = false
-    word_correct: bool = true
+    all_words_correct: bool = False
+    word_correct: bool = True
     shifted_word_sentence = sentence.copy()
 
     while not all_words_correct:
         for word in shifted_word_sentence:
             if not word_in_dict(word, english_words):
-                word_correct = false
+                word_correct = False
                 break
         if word_correct:
             all_words_correct = True
@@ -61,19 +61,8 @@ def brute_force_cypher(sentence: list[str], english_words: list[str]):
             print("We fucked up")
             break
 
-
-
-    # for i in range(alphabet_length):
-    #     success: bool = True
-    #     for word in words:
-    #         shifted_word: str = ""
-    #         for j in range(len(word)):
-    #             schar = (((word[j] - a_ascii) + i) % alphabet_length) + a_ascii
-    #             shifted_word += schar
-    #             if shifted_word not in english_words:
-    #                 break
-    #      pass
-
+    print(shifted_word_sentence)
+    return shift_counter
 
 
 def parse_file(file_path: Path, english_words: list[str]):
@@ -86,9 +75,8 @@ def parse_file(file_path: Path, english_words: list[str]):
         a_line: str = a_line.strip()
         sentences.append(a_line)
 
-    #Bug here either lines have to be passed one by one in for loop or
-    #for loop should be moved inside parse line
-    parse_line(sentences, english_words)
+    for sentence in sentences:
+        parse_line(sentence, english_words)
 
 def main():
     file_path = get_user_input("Enter dictionary file name or path:")

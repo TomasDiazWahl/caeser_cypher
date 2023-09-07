@@ -57,12 +57,10 @@ def brute_force_cypher(sentence: list[str], english_words: list[str]):
             print(shift_counter)
             break
         else:
-            shifted_counter: int = 0
-            for word in shifted_word_sentence:
+            for i, word in enumerate(shifted_word_sentence):
                 shifted_word = shift(word)
-                shifted_word_sentence[shifted_counter] = shifted_word
-                shifted_counter += 1
-            shift_counter += 1;
+                shifted_word_sentence[i] = shifted_word
+            shift_counter += 1
         if shift_counter >= alphabet_length - 1:
             print("We fucked up")
             break

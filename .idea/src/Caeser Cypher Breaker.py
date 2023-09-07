@@ -31,14 +31,15 @@ def word_in_dict(word: str, english_words: list[str]) -> bool:
         return True
 
 def shift(word) -> str:
+    alphabet_length: int = 26
+    a_ascii: int = ord('a')
     shifted_word: str = ""
     for i in range(len(word)):
-        schar = (((word[i] - a_ascii) + i) % alphabet_length) + a_ascii
+        schar = chr((((ord(word[i]) - a_ascii) + 1) % alphabet_length) + a_ascii)
         shifted_word += schar
-        return shifted_word
+    return shifted_word
 
 def brute_force_cypher(sentence: list[str], english_words: list[str]):
-    a_ascii: int = ord('a')
     alphabet_length: int = 26
     shift_counter: int = 0
     all_words_correct: bool = False
@@ -52,10 +53,15 @@ def brute_force_cypher(sentence: list[str], english_words: list[str]):
                 break
         if word_correct:
             all_words_correct = True
+            print(shifted_word_sentence)
+            print(shift_counter)
             break
         else:
+            shifted_counter: int = 0
             for word in shifted_word_sentence:
                 shifted_word = shift(word)
+                shifted_word_sentence[shifted_counter] = shifted_word
+                shifted_counter += 1
             shift_counter += 1;
         if shift_counter >= alphabet_length - 1:
             print("We fucked up")
@@ -79,9 +85,11 @@ def parse_file(file_path: Path, english_words: list[str]):
         parse_line(sentence, english_words)
 
 def main():
-    file_path = get_user_input("Enter dictionary file name or path:")
+    # file_path = get_user_input("Enter dictionary file name or path:")
+    file_path = Path("dictionary.dic")
     english_words = read_dictionary(file_path)
-    file_path: Path = get_user_input("Please enter name of text file or full path:")
+    # file_path: Path = get_user_input("Please enter name of text file or full path:")
+    file_path = Path("caesar-ciphertext.txt")
     parse_file(file_path, english_words)
 
 # end main
